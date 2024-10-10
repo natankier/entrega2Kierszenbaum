@@ -1,18 +1,17 @@
 import CartWidget from "./CartWidget"
-import logo from "../../assets/logo.png"
+import logo from "../../assets/logoCarne.png"
 import "./navbar.scss"
 const NavBar = () => {
 return (
     <nav className="navbar">
         <div className= "marca">
-            <img src= {logo} alt="" width={200}/>
+            <img src= {logo} alt="" width={100}/>
         </div>
 
         <ul className="categorias">
-            <li>asado</li>
-            <li>ojo de bife</li>
-            <li>paleta</li>
-            <li>entrecot</li>
+            <li>Cortes</li>
+            <li>Compras</li>
+            <li>Promociones</li>
         </ul>
     <CartWidget />
     
