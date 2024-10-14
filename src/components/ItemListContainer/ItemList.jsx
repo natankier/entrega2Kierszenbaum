@@ -1,11 +1,10 @@
+import Item from "./Item"
 const ItemList = ( {products} ) => {
     return (
-    <div>
+    <div className="row  ">
         {
         products.map((product)=>(
-            <div key={product.id}>
-            <p>{product.name}</p>
-            </div>
+            <Item product = {product} key={product.id}/>
         ))
         }     
     </div>
