@@ -1,14 +1,40 @@
-.navbar{
+.navbar {
     display: flex;
     justify-content: space-around;
+    background-color: white;
+  
+    .container-fluid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  
+    .navbar-nav {
+      display: flex;
+      gap: 20px;
+    }
+  
+    .navbar-cart {
+      display: flex;
+      align-items: center;
+    }
+  
+    .categorias {
+      display: flex;
+      list-style: none;
+    }
+  
+    .Icon-cartWidget {
+      display: flex;
+      color: black;
+      text-decoration: none; 
+    }
 
-.categorias{
-    display: flex;
-    list-style: none;
-}
+    .empty-cartWidget{
+      color: red;
+    }
 
-.cartwidget{
-    display: flex;
-}
-}
 
+    }
+  
+  

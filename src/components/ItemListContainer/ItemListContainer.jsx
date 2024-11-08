@@ -1,34 +1,46 @@
 import { useState, useEffect } from "react"
 import ItemList from './ItemList.jsx';
-import { getProducts } from "../../data/data.js"
 import { useParams  } from "react-router-dom";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import db from "../../db/db.js"
 import "./ItemListContainer.scss"
 
 const ItemListContainer = ( {saludo}) => {
   const [ products,  setProducts ] = useState ([])
   const {idCategory} = useParams()
 
+  const getProducts = ()=>{
+    const collectionName = collection(db, "products")
+    getDocs(collectionName)
+    .then((dataDb)=>{
+      const productsDb = dataDb.docs.map((productDb)=>{
+        return{ id: productDb.id, ...productDb.data()   }
+      })
+
+      setProducts(productsDb);
+    })
+  }
+
+  const getProductsByCategory =()=>{
+    const collectionName = collection (db, "products")
+    const q = query(   collectionName, where( "category", "==", idCategory ))
+
+    getDocs(q)
+    .then((dataDb)=>{
+      const productsDb = dataDb.docs.map((productsDb)=>{
+        return {id: productsDb.id, ...productsDb.data() }
+      })
+      setProducts(productsDb)
+    })
+  }
 
 
   useEffect( ()=>{
-    getProducts()
-    .then((data) => {
     if(idCategory){
-        const filterProducts = data.filter( (product)=> product.category === idCategory)
-        setProducts(filterProducts)
+      getProductsByCategory()
     }else{
-      setProducts(data)
+      getProducts()
     }
-    })
-  
-    .catch((error) => {
-              console.error(error);
-            })
-
-      .finally(()=>{
-        console.log("finalizar")
-      })
-  
   }, [idCategory])
 
 
@@ -41,5 +53,4 @@ const ItemListContainer = ( {saludo}) => {
     </div>
   )
 }
-
 export default ItemListContainer
