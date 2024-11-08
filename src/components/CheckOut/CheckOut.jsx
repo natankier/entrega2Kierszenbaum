@@ -1,78 +1,83 @@
-import { useState } from "react"
-import FormCheckOut from "./FormCheckOut"
-import { useContext } from "react"
-import {CartContext} from "../../context/CartContext.jsx"
-import { Timestamp, addDoc, collection, setDoc , doc} from "firebase/firestore"
-import db from "../../db/db.js"
-import { Link } from "react-router-dom"
+import { useState } from "react";
+import FormCheckOut from "./FormCheckOut";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext.jsx";
+import { Timestamp, addDoc, collection, setDoc, doc } from "firebase/firestore";
+import db from "../../db/db.js";
+import { Link } from "react-router-dom";
+import "./CheckOut.scss";
 
 const CheckOut = () => {
-    const [dataForm, setDataForm] = useState({
-        fullname: "",
-        phone: "",
-        email:""
+  const [dataForm, setDataForm] = useState({
+    fullname: "",
+    phone: "",
+    email: "",
+  });
 
+  const [orderId, setOrderId] = useState(null);
 
-    })
+  const { cart, totalPrice, deleteCart } = useContext(CartContext);
 
-    const [orderId, setOrderId] = useState(null)
+  const handleChangeInput = (event) => {
+    setDataForm({ ...dataForm, [event.target.name]: event.target.value });
+  };
 
-    const { cart, totalPrice, deleteProductInCart } = useContext(CartContext)
+  const handleSubmitForm = (event) => {
+    event.preventDefault();
 
-    const handleChangeInput =(event)=>{
-        setDataForm({ ...dataForm, [event.target.name] :event.target.value })
+    if (!dataForm.fullname || !dataForm.phone || !dataForm.email) {
+      alert("Por favor complete todos los campos.");
+      return;
     }
 
-    const handleSubmitForm =(event)=>{
-        event.preventDefault()
+    const order = {
+      buyer: { ...dataForm },
+      products: [...cart],
+      date: Timestamp.fromDate(new Date()),
+      total: totalPrice(),
+    };
+    uploadOrder(order);
+  };
 
-        const order = {
-            buyer: { ...dataForm},
-            products: [ ...cart],
-            date: Timestamp.fromDate( new Date ( )),
-            total: totalPrice(),
+  const uploadOrder = (newOrder) => {
+    const ordersCollection = collection(db, "orders");
+    addDoc(ordersCollection, newOrder)
+      .then((response) => {
+        setOrderId(response.id);
+      })
+      .finally(() => {
+        updateStock();
+      });
+  };
 
-        }
-        uploadOrder(order)
-    }
-
-    const uploadOrder = (newOrder) =>{
-        const ordersCollection = collection(db, "orders")
-        addDoc(ordersCollection, newOrder)
-            .then((response)=>{
-                setOrderId(response.id)
-            })
-
-
-            .finally(()=>{
-            updateStock()
-            })
-    }
-const updateStock = () => {
-    cart.map(({ id, quantity, stock, ...productCart }) => {
-        const productRef = doc(db, "products", id);
-        setDoc(productRef, { ...productCart, stock: stock - quantity });
+  const updateStock = () => {
+    cart.map(({ quantity, id, ...productCart }) => {
+      const productRef = doc(db, "products", id);
+      setDoc(productRef, { ...productCart, stock: productCart.stock - quantity });
     });
 
-    deleteProductInCart();
-};
+    deleteCart();
+  };
 
   return (
-    <div>
-        {
-            orderId ?(
-                <div>
-                    <h2>Orden realizada con exito</h2>
-                    <p>Conserve su numero de seguimiento: {orderId}</p>
-                    <Link to="/">Volver al inicio</Link>
-                </div>
-            ) : (
-        <FormCheckOut dataForm={dataForm} handleChangeInput={handleChangeInput} handleSubmitForm={handleSubmitForm}/>
-       )
-    }
+    <div className="checkout-container">
+      {orderId ? (
+        <div className="success-message">
+          <h2>Orden realizada con éxito</h2>
+          <p>Conserve su número de seguimiento: {orderId}</p>
+          <Link to="/" className="link">
+            Volver al inicio
+          </Link>
+        </div>
+      ) : (
+        <FormCheckOut
+          dataForm={dataForm}
+          handleChangeInput={handleChangeInput}
+          handleSubmitForm={handleSubmitForm}
+        />
+      )}
     </div>
+  );
+};
 
-  )
-}
-
-export default CheckOut
+export default CheckOut;

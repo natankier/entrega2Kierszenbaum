@@ -21,12 +21,14 @@ const ItemCount = ({stock , addProduct}) => {
     }
   return (
     <div className='count'>
-
+        < div className='sumar'>
         <button onClick={ handleClickDecrement } >-</button>
         <p>{count}</p>
         <button onClick = {handleClickIncrement}>+</button>
+        </div>
+        <div>
         <button onClick={ () => addProduct (count)}  >Agregar producto</button>
-
+        </div>
     </div>
   )
 }

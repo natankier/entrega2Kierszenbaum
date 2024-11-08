@@ -41,6 +41,10 @@ const isInCart = (idProduct) => {
         return price
     }
 
+    const deleteCart = () => {
+        setCart([])
+    }
+
     return(
         <CartContext.Provider value={{cart, addProductInCart, totalQuantity, totalPrice, deleteProductInCart}}>
 

@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import { useContext } from 'react';
 import { CartContext } from '../../context/CartContext.jsx';
 import { doc, getDoc } from 'firebase/firestore';
+import './ItemDetail.scss';  // O la ruta correcta de tu archivo SCSS
+
 import db from "../../db/db.js"
 
 const ItemDetailContainer = () => {
@@ -36,7 +38,7 @@ const ItemDetailContainer = () => {
 
 
   return (
-<div className='container'>
+<div className='container item/-'>
     <ItemDetail  product={product} addProduct={addProduct} hidenItemCount={hidenItemCount}/>
 </div>
   )

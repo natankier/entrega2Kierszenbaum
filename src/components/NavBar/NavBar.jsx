@@ -9,7 +9,7 @@ const NavBar = () => {
       <div className="container-fluid">
         {/* Logo en la izquierda */}
         <Link to="/" className="navbar-brand">
-          <img src={logo} alt="Logo" width={100} />
+          <img src={logo} alt="Logo" className="navbar-logo" />
         </Link>
 
         <button
@@ -23,7 +23,6 @@ const NavBar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-
 
         <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul className="navbar-nav mx-auto">

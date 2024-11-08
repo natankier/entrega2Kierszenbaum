@@ -1,40 +1,121 @@
+/* navbar.scss */
 .navbar {
-    display: flex;
-    justify-content: space-around;
-    background-color: white;
-  
-    .container-fluid {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-  
-    .navbar-nav {
-      display: flex;
-      gap: 20px;
-    }
-  
-    .navbar-cart {
-      display: flex;
-      align-items: center;
-    }
-  
-    .categorias {
-      display: flex;
-      list-style: none;
-    }
-  
-    .Icon-cartWidget {
-      display: flex;
-      color: black;
-      text-decoration: none; 
-    }
+  background-color: #333;
+  padding: 10px 0;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-    .empty-cartWidget{
-      color: red;
-    }
+.navbar .container-fluid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.navbar-brand img {
+  width: 100px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
 
-    }
-  
-  
+.navbar-brand img:hover {
+  transform: scale(1.1);
+}
+
+.navbar-toggler {
+  border: none;
+  background-color: transparent;
+}
+
+.navbar-toggler-icon {
+  background-color: #fff;
+  width: 30px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.navbar-nav {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  color: #fff;
+  font-size: 18px;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #27ae60;  // Green color on hover
+  transform: translateY(-3px);
+}
+
+.navbar-cart {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .navbar-nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .navbar-cart {
+    margin-top: 15px;
+  }
+}
+.cartwidget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-decoration: none;
+}
+
+.Icon-cartWidget {
+  color: #28a745; /* Color del carrito cuando tiene productos */
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1); /* Aumenta el tamaño al pasar el ratón */
+    color: #218838; /* Cambio de color al hacer hover */
+  }
+}
+
+.empty-cartWidget {
+  color: #ccc; /* Color del carrito cuando está vacío */
+  cursor: not-allowed; /* Cursor bloqueado cuando está vacío */
+}
+
+.cartwidget p {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: #e74c3c; /* Rojo brillante para el contador */
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 6px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.cartwidget p {
+  display: none; /* Inicialmente ocultamos el contador */
+}
+
+.cartwidget p {
+  display: block; /* Lo mostramos cuando hay productos en el carrito */
+}
+
+.cartwidget:hover p {
+  transform: scale(1.2); /* Aumentamos el tamaño del contador al hacer hover */
+  transition: all 0.3s ease-in-out;
+}

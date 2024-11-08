@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { CartProvider, CartContext } from "./context/CartContext";
 import Cart from "./components/Cart/Cart";
 import CheckOut from "./components/CheckOut/CheckOut.jsx"
+import Footer from './components/Footer/Footer';
 import './App.css'
 
 
@@ -27,7 +28,7 @@ function App() {
     </CartProvider>
 
     </BrowserRouter>
-
+    <Footer />
   </div>
   )
 }
