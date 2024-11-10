@@ -13,6 +13,9 @@ const FormCheckOut = ({dataForm, handleChangeInput, handleSubmitForm }) => {
         <label > Correo electronico </label>
         <input type="text" name="email" value={dataForm.email}  onChange={handleChangeInput}/>
 
+        <label> Repetir correo electronico</label>
+        <input type="text" name="repeatEmail" value={dataForm.repeatEmail} onChange={handleChangeInput} />
+
         <button type="submit">Enviar orden</button>
         </form>  
     </div>

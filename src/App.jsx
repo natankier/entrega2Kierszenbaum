@@ -7,6 +7,8 @@ import { CartProvider, CartContext } from "./context/CartContext";
 import Cart from "./components/Cart/Cart";
 import CheckOut from "./components/CheckOut/CheckOut.jsx"
 import Footer from './components/Footer/Footer';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css'
 
 
@@ -18,6 +20,7 @@ function App() {
   <BrowserRouter>
   <CartProvider>
     <NavBar />
+    <ToastContainer />
     <Routes> 
       <Route path="/" element={ <ItemListContainer saludo={"Bienvenidos"}/> }/>
       <Route path="/category/:idCategory" element={ <ItemListContainer saludo={"Bienvenidos"}/> }/>

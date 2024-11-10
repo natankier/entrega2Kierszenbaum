@@ -5,6 +5,7 @@ import { CartContext } from "../../context/CartContext.jsx";
 import { Timestamp, addDoc, collection, setDoc, doc } from "firebase/firestore";
 import db from "../../db/db.js";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify"
 import "./CheckOut.scss";
 
 const CheckOut = () => {
@@ -12,6 +13,7 @@ const CheckOut = () => {
     fullname: "",
     phone: "",
     email: "",
+    repeatEmail: ""
   });
 
   const [orderId, setOrderId] = useState(null);
@@ -24,19 +26,18 @@ const CheckOut = () => {
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
-
-    if (!dataForm.fullname || !dataForm.phone || !dataForm.email) {
-      alert("Por favor complete todos los campos.");
-      return;
-    }
-
     const order = {
       buyer: { ...dataForm },
       products: [...cart],
       date: Timestamp.fromDate(new Date()),
       total: totalPrice(),
     };
-    uploadOrder(order);
+
+    if( dataForm.email === dataForm.repeatEmail){
+      uploadOrder(order);
+    }else{
+      toast.error("Los emails deben coincidir")
+    }
   };
 
   const uploadOrder = (newOrder) => {

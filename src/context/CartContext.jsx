@@ -46,7 +46,7 @@ const isInCart = (idProduct) => {
     }
 
     return(
-        <CartContext.Provider value={{cart, addProductInCart, totalQuantity, totalPrice, deleteProductInCart}}>
+        <CartContext.Provider value={{cart, addProductInCart, totalQuantity, totalPrice, deleteProductInCart, deleteCart}}>
 
             {children}
 
