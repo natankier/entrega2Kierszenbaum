@@ -6,7 +6,7 @@ import { Timestamp, addDoc, collection, setDoc, doc } from "firebase/firestore";
 import db from "../../db/db.js";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify"
-import "./CheckOut.scss";
+import "./checkout.scss"
 
 const CheckOut = () => {
   const [dataForm, setDataForm] = useState({

@@ -1,25 +1,45 @@
-import React from 'react'
+import React from 'react';
 
-const FormCheckOut = ({dataForm, handleChangeInput, handleSubmitForm }) => {
+const FormCheckOut = ({ dataForm, handleChangeInput, handleSubmitForm }) => {
   return (
-    <div>
-        <form  onSubmit={handleSubmitForm}>
-        <label > Nombre Completo </label>
-        <input type="text" name="fullname" value={dataForm.fullname}  onChange={handleChangeInput}/>
+    <div className="form-container">
+      <form onSubmit={handleSubmitForm}>
+        <label>Nombre Completo</label>
+        <input
+          type="text"
+          name="fullname"
+          value={dataForm.fullname}
+          onChange={handleChangeInput}
+        />
 
-        <label > Telefono </label>
-        <input type="text" name="phone" value={dataForm.phone}  onChange={handleChangeInput}/>
-    
-        <label > Correo electronico </label>
-        <input type="text" name="email" value={dataForm.email}  onChange={handleChangeInput}/>
+        <label>Teléfono</label>
+        <input
+          type="text"
+          name="phone"
+          value={dataForm.phone}
+          onChange={handleChangeInput}
+        />
 
-        <label> Repetir correo electronico</label>
-        <input type="text" name="repeatEmail" value={dataForm.repeatEmail} onChange={handleChangeInput} />
+        <label>Correo Electrónico</label>
+        <input
+          type="text"
+          name="email"
+          value={dataForm.email}
+          onChange={handleChangeInput}
+        />
 
-        <button type="submit">Enviar orden</button>
-        </form>  
+        <label>Repetir Correo Electrónico</label>
+        <input
+          type="text"
+          name="repeatEmail"
+          value={dataForm.repeatEmail}
+          onChange={handleChangeInput}
+        />
+
+        <button type="submit">Enviar Orden</button>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default FormCheckOut
+export default FormCheckOut;
